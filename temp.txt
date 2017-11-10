@@ -39,6 +39,38 @@ csv_files = [f for f in os.listdir(path) if f.endswith('.csv')]
 #print(csv_files)
 
 
+with open('source_To_destination.csv', 'w') as csvfile:
+    fieldnames = ['Time', 'Source','Destination','Length']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    i=0
+    while i<len(csv_files):
+        #print("New file starts")
+        dir=str(path+csv_files[i])
+        #print(source)
+        time,source,destination,packet_length=readMyFile(dir)
+        #print(unique_ip)
+        j=0
+        while j< len(unique_ip):
+            k=0
+            while k< len(source):
+                if(str(unique_ip[j])==(source[k])):
+                    writer.writerow({'Time': time[k], 'Source': source[k],'Destination': destination[k], 'Length': packet_length[k]})
+                    #print("Hello")
+                k=k+1
+            j=j+1
+        j=0
+        while j< len(unique_ip):
+            k=0
+            while k< len(destination):
+                if(str(unique_ip[j])==(destination[k])):
+                    writer.writerow({'Time': time[k], 'Source': source[k],'Destination': destination[k], 'Length': packet_length[k]})
+                    #print("Hello")
+                k=k+1
+            j=j+1
+            #time.sleep(5)
+        i=i+1
+
 '''
 i=0
 while i<len(unique_ip):
@@ -79,4 +111,5 @@ print(source)
 print(destination)
 print(packet_length)
 '''
+
 
