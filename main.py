@@ -4,7 +4,7 @@ import time
 f = open("unique_ip.txt","r")
 ip = f.readline()
 unique_ip=ip.split(",")
-#print(unique_ip)
+print(unique_ip)
 '''
 with open("unique_ip.txt", "r") as ins:
     unique_ip = []
@@ -34,12 +34,15 @@ def readMyFile(filename):
  
     return time,source,destination,packet_length
 
-path = '/home/v77x588/Documents/LiClipse Workspace/EdgeConnex/Pcap/'
+path = 'C:\\Users\\Prima\\Documents\\LiClipse Workspace\\EdgeConnex\\Pcap'
 csv_files = [f for f in os.listdir(path) if f.endswith('.csv')]
-#print(csv_files)
+print(csv_files)
 
 
-'''
+
+
+
+
 i=0
 while i<len(unique_ip):
     j=0
@@ -48,7 +51,10 @@ while i<len(unique_ip):
         k=0
         while k< len(csv_files[j]):
             if(unique_ip[i]==source[k]):
-                writer.writerow({'Time': time[k], 'Source': source[k],'Destination': destination[k], 'Length': packet_length[k]})
+                #writer = csv.writer(f)
+                with open("SourceToDestination.csv", "w") as uplink_file:
+                    wr = csv.writer(uplink_file)
+                    wr.writerow({'Time': time[k], 'Source': source[k],'Destination': destination[k], 'Length': packet_length[k]})
 
 
             k=k+1
@@ -56,6 +62,20 @@ while i<len(unique_ip):
     
     i=i+1
 
+#uplink_file.closed()
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 i=0
 while i<len(csv_files):
     dir=str(path+csv_files[i])
